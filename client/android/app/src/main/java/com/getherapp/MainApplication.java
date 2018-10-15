@@ -1,4 +1,4 @@
-package com.client;
+package com.getherapp;
 
 import android.app.Application;
 
