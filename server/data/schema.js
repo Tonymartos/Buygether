@@ -29,7 +29,24 @@ export const typeDefs = gql`
       id: Int!
       name: String!
       quantity: Int!
-      price: Double!
+      price: Float!
   }
-  `;
+
+  # query for types
+  type Query {
+
+    user(username: String, email: String, id: Int): User
+
+    group(id: Int): Group
+
+    list(id: Int): List
+
+    product(id: Int): Product
+
+  }
+  schema {
+    query: Query
+  }
+`;
+
 export default typeDefs;
