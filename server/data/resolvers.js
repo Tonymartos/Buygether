@@ -4,7 +4,8 @@ import {
   List,
   Product,
 } from './connectors';
-// TODO: poner listas y productos y añadirlos a grupos. poner amigos
+// FIXME: las queries de lista y producto no furulan
+// El problema puede venir de connectors.js
 export const resolvers = {
   Query: {
     user(_, args) {
@@ -14,10 +15,10 @@ export const resolvers = {
       return Group.findOne({ where: args });
     },
     list(_, args) {
-      return List.findAll({ where: args });
+      return List.findOne({ where: args, order: [['createdAt', 'DESC']] });
     },
     product(_, args) {
-      return Product.findAll({ where: args });
+      return Product.findOne({ where: args, order: [['updatedAt', 'DESC']] });
     },
   },
   User: {
@@ -31,6 +32,14 @@ export const resolvers = {
   Group: {
     users(group) {
       return group.getUsers();
+    },
+    lists(group) {
+      return group.getLists();
+    },
+  },
+  List: {
+    products(list) {
+      return list.getProducts({ order: [['createdAt', 'DESC']] });
     },
   },
 };

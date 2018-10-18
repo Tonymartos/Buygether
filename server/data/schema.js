@@ -19,17 +19,17 @@ export const typeDefs = gql`
     lists: [List!]! #buy lists
   }
   type List {
-      id: Int! 
-      name: String!
-      state: Boolean!
-      date: Date!
-      products: [Product!]!
+    id: Int! 
+    name: String!
+    state: Boolean!
+    createdAt: Date!
+    products: [Product!]!
   }
   type Product {
-      id: Int!
-      name: String!
-      quantity: Int!
-      price: Float!
+    id: Int!
+    name: String!
+    quantity: Int!
+    price: Float
   }
 
   # query for types

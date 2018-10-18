@@ -31,7 +31,7 @@ const mockDB = async ({ populating = true, force = true }) => {
     ),
   );
   console.log('populating users....');
-  const usersGroups = await Promise.all(
+  const usersInGroups = await Promise.all(
     R.map(async (group) => {
       const users = await Promise.all(
         R.times(async () => {
@@ -46,7 +46,39 @@ const mockDB = async ({ populating = true, force = true }) => {
       return users;
     }, groups),
   );
-  // TODO: rellenar listas y productos y amigos
+  console.log('populating lists....');
+  await Promise.all(
+    R.map(async (group) => {
+      const lists = await Promise.all(
+        R.times(async (n) => {
+          const list = await group.createList({
+            name: faker.lorem.word(),
+            state: !n, // solo está activa la primera lista de cada grupo
+          });
+          await Promise.all(
+            R.times(async () => {
+              await list.createProduct({
+                name: faker.lorem.word(),
+                quantity: Math.ceil(Math.random() * 10),
+                price: Math.random() * 10,
+              });
+            }, PRODUCTS_PER_LIST),
+          );
+          return list;
+        }, LISTS_PER_GROUP),
+      );
+      return lists;
+    }, groups),
+  );
+
+
+  console.log('populating friends....');
+  await R.map(
+    users => users.map(
+      (current, i) => users.map((user, j) => (i !== j ? current.addFriend(user) : false)),
+    ),
+    usersInGroups,
+  );
   console.log('done!');
 
   return Promise.resolve(true);
