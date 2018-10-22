@@ -40,8 +40,8 @@ ListModel.belongsToMany(ProductModel, { through: 'ListProduct' });
 
 const Group = db.models.group;
 const User = db.models.user;
-const List = db.model.list;
-const Product = db.model.product;
+const List = db.models.list;
+const Product = db.models.product;
 
 export {
   db, Group, User, List, Product,
