@@ -11,6 +11,7 @@ import {
 } from 'react-navigation-redux-helpers';
 import { Text, View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
+import Groups from './screens/groups';
 
 const styles = StyleSheet.create({
   container: {
@@ -28,11 +29,11 @@ const TestScreen = title => () => (
 // tabs in main screen
 const MainScreenNavigator = createMaterialTopTabNavigator(
   {
-    Chats: { screen: TestScreen('Chats') },
+    Groups: { screen: Groups },
     Settings: { screen: TestScreen('Settings') },
   },
   {
-    initialRouteName: 'Chats',
+    initialRouteName: 'Groups',
   },
 );
 const AppNavigator = createStackNavigator(
