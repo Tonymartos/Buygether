@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   StackActions,
   NavigationActions,
@@ -9,23 +8,10 @@ import {
   reduxifyNavigator,
   createReactNavigationReduxMiddleware,
 } from 'react-navigation-redux-helpers';
-import { Text, View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import Groups from './screens/groups';
+import TestScreen from './screens/testScreen';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
-  },
-});
-const TestScreen = title => () => (
-  <View style={styles.container}>
-    <Text>{title}</Text>
-  </View>
-);
 // tabs in main screen
 const MainScreenNavigator = createMaterialTopTabNavigator(
   {

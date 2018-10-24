@@ -1,11 +1,11 @@
-import R from 'ramda';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import {
   FlatList, Text, TouchableHighlight, View,
 } from 'react-native';
+import { graphql } from 'react-apollo';
+import { USER_QUERY } from '../graphql/user.query';
 
-const fakeGroups = R.times(i => ({ name: 'group ' + i, id: i }), 10);
 
 const Group = ({ group: { name } }) => (
   <TouchableHighlight>
@@ -27,12 +27,38 @@ class Groups extends Component {
   keyExtractor = ({ id }) => id.toString();
 
   render() {
+    const { user } = this.props;
     return (
       <View>
-        <FlatList data={fakeGroups} keyExtractor={this.keyExtractor} renderItem={this.renderItem} />
+        {user && (
+        <FlatList
+          data={user.groups}
+          keyExtractor={this.keyExtractor}
+          renderItem={this.renderItem}
+        />
+        )}
       </View>
     );
   }
 }
 
-export default Groups;
+Groups.propTypes = {
+  user: PropTypes.shape({
+    groups: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
+      }),
+    ),
+  }),
+};
+
+const userQuery = graphql(USER_QUERY, {
+  options: () => ({ variables: { id: 1 } }), // fake the user for now
+  props: ({ data: { loading, user } }) => ({
+    loading,
+    user,
+  }),
+});
+
+export default userQuery(Groups);
