@@ -25,9 +25,10 @@ const MainScreenNavigator = createMaterialTopTabNavigator(
 const AppNavigator = createStackNavigator(
   {
     Main: { screen: MainScreenNavigator },
+    Test: { screen: TestScreen('working!') },
   },
   {
-    headerMode: 'none',
+    mode: 'modal',
   },
 );
 // reducer initialization code

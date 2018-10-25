@@ -7,8 +7,8 @@ import { graphql } from 'react-apollo';
 import { USER_QUERY } from '../graphql/user.query';
 
 
-const Group = ({ group: { name } }) => (
-  <TouchableHighlight>
+const Group = ({ group: { name }, onGroupPress }) => (
+  <TouchableHighlight onPress={onGroupPress} underlayColor='rgba(100, 200, 255, 0.3)'>
     <View>
       <Text>{name}</Text>
     </View>
@@ -19,12 +19,23 @@ Group.propTypes = {
   group: PropTypes.shape({
     name: PropTypes.string,
   }),
+  onGroupPress: PropTypes.func,
 };
 
 class Groups extends Component {
   renderItem = ({ item }) => <Group group={item} />;
 
   keyExtractor = ({ id }) => id.toString();
+
+  onGroupPress = group => () => {
+    const {
+      navigation: { navigate },
+    } = this.props;
+    console.log(group.name);
+    navigate('Test', { title: 'group.name' });
+  };
+
+  renderItem = ({ item }) => <Group group={item} onGroupPress={this.onGroupPress(item)} />;
 
   render() {
     const { user } = this.props;
@@ -43,6 +54,9 @@ class Groups extends Component {
 }
 
 Groups.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+  }),
   user: PropTypes.shape({
     groups: PropTypes.arrayOf(
       PropTypes.shape({

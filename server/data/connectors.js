@@ -19,7 +19,6 @@ const UserModel = db.define('user', {
 const ListModel = db.define('list', {
   name: { type: Sequelize.STRING },
   state: { type: Sequelize.BOOLEAN },
-  // date: { type: Sequelize.DATE }, Probablemente no sea necesario porque la BD la crea sola
 });
 const ProductModel = db.define('product', {
   name: { type: Sequelize.STRING },
