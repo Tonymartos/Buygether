@@ -16,7 +16,7 @@ import TestScreen from './screens/testScreen';
 const MainScreenNavigator = createMaterialTopTabNavigator(
   {
     Groups: { screen: Groups },
-    Settings: { screen: TestScreen('Settings') },
+    Settings: { screen: TestScreen },
   },
   {
     initialRouteName: 'Groups',
@@ -25,7 +25,7 @@ const MainScreenNavigator = createMaterialTopTabNavigator(
 const AppNavigator = createStackNavigator(
   {
     Main: { screen: MainScreenNavigator },
-    Test: { screen: TestScreen('working!') },
+    Test: { screen: TestScreen },
   },
   {
     mode: 'modal',

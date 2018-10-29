@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -9,10 +9,24 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
 });
-const TestScreen = title => () => (
-  <View style={styles.container}>
-    <Text>{title}</Text>
-  </View>
-);
+class TestScreen extends Component {
+  static navigationOptions({ navigation }) {
+    return {
+      title: navigation.getParam('title', 'title not found'),
+      headerStyle: {
+        backgroundColor: '#4286f4',
+      },
+      headerTintColor: '#fff',
+    };
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text>cosas</Text>
+      </View>
+    );
+  }
+}
 
 export default TestScreen;

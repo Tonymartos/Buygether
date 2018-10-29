@@ -1,14 +1,24 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import {
-  FlatList, Text, TouchableHighlight, View,
+  FlatList, Text, TouchableHighlight, View, StyleSheet,
 } from 'react-native';
 import { graphql } from 'react-apollo';
 import { USER_QUERY } from '../graphql/user.query';
 
+const styles = StyleSheet.create({
+  group: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: '#000',
+    borderRadius: 10,
+    padding: 20,
+    margin: 10,
+  },
+});
 
 const Group = ({ group: { name }, onGroupPress }) => (
-  <TouchableHighlight onPress={onGroupPress} underlayColor='rgba(100, 200, 255, 0.3)'>
+  <TouchableHighlight style={styles.group} onPress={onGroupPress} underlayColor="rgba(100, 200, 255, 0.3)">
     <View>
       <Text>{name}</Text>
     </View>
@@ -32,7 +42,7 @@ class Groups extends Component {
       navigation: { navigate },
     } = this.props;
     console.log(group.name);
-    navigate('Test', { title: 'group.name' });
+    navigate('Test', { title: group.name });
   };
 
   renderItem = ({ item }) => <Group group={item} onGroupPress={this.onGroupPress(item)} />;
@@ -42,11 +52,11 @@ class Groups extends Component {
     return (
       <View>
         {user && (
-        <FlatList
-          data={user.groups}
-          keyExtractor={this.keyExtractor}
-          renderItem={this.renderItem}
-        />
+          <FlatList
+            data={user.groups}
+            keyExtractor={this.keyExtractor}
+            renderItem={this.renderItem}
+          />
         )}
       </View>
     );
