@@ -11,6 +11,7 @@ import {
 import { connect } from 'react-redux';
 import Groups from './screens/groups';
 import TestScreen from './screens/testScreen';
+import GroupScreen from './screens/group.screen';
 
 // tabs in main screen
 const MainScreenNavigator = createMaterialTopTabNavigator(
@@ -25,6 +26,7 @@ const MainScreenNavigator = createMaterialTopTabNavigator(
 const AppNavigator = createStackNavigator(
   {
     Main: { screen: MainScreenNavigator },
+    Group: { screen: GroupScreen },
     Test: { screen: TestScreen },
   },
   {

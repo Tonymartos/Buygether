@@ -33,7 +33,6 @@ Group.propTypes = {
 };
 
 class Groups extends Component {
-  renderItem = ({ item }) => <Group group={item} />;
 
   keyExtractor = ({ id }) => id.toString();
 
@@ -42,7 +41,7 @@ class Groups extends Component {
       navigation: { navigate },
     } = this.props;
     console.log(group.name);
-    navigate('Test', { title: group.name });
+    navigate('Group', { title: group.name, groupId: group.id });
   };
 
   renderItem = ({ item }) => <Group group={item} onGroupPress={this.onGroupPress(item)} />;
