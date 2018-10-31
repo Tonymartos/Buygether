@@ -33,6 +33,15 @@ List.propTypes = {
 };
 
 class GroupScreen extends Component {
+  static navigationOptions({ navigation }) {
+    return {
+      title: navigation.getParam('title', 'title not found'),
+      headerStyle: {
+        backgroundColor: '#4286f4',
+      },
+      headerTintColor: '#fff',
+    };
+  }
 
   keyExtractor = ({ id }) => id.toString();
 
@@ -41,7 +50,7 @@ class GroupScreen extends Component {
       navigation: { navigate },
     } = this.props;
     console.log(list.name);
-    navigate('Test', { title: list.name });
+    navigate('List', { title: list.name, listId: list.id });
   };
 
   renderItem = ({ item }) => <List list={item} onListPress={this.onListPress(item)} />;
@@ -78,7 +87,7 @@ GroupScreen.propTypes = {
 };
 
 const groupQuery = graphql(GROUP_QUERY, {
-  options: props => ({ variables: { id: props.navigation.state.groupid } }),
+  options: props => ({ variables: { id: props.navigation.state.groupId } }),
   props: ({ data: { loading, group } }) => ({
     loading,
     group,

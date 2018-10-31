@@ -33,7 +33,6 @@ Group.propTypes = {
 };
 
 class Groups extends Component {
-
   keyExtractor = ({ id }) => id.toString();
 
   onGroupPress = group => () => {
