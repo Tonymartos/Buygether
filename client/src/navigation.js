@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   StackActions,
   NavigationActions,
@@ -9,38 +8,31 @@ import {
   reduxifyNavigator,
   createReactNavigationReduxMiddleware,
 } from 'react-navigation-redux-helpers';
-import { Text, View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
+import Groups from './screens/groups';
+import TestScreen from './screens/testScreen';
+import GroupScreen from './screens/group.screen';
+import ListScreen from './screens/list.screen';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
-  },
-});
-const TestScreen = title => () => (
-  <View style={styles.container}>
-    <Text>{title}</Text>
-  </View>
-);
 // tabs in main screen
 const MainScreenNavigator = createMaterialTopTabNavigator(
   {
-    Chats: { screen: TestScreen('Chats') },
-    Settings: { screen: TestScreen('Settings') },
+    Groups: { screen: Groups },
+    Settings: { screen: TestScreen },
   },
   {
-    initialRouteName: 'Chats',
+    initialRouteName: 'Groups',
   },
 );
 const AppNavigator = createStackNavigator(
   {
     Main: { screen: MainScreenNavigator },
+    Group: { screen: GroupScreen },
+    List: { screen: ListScreen },
+    Test: { screen: TestScreen },
   },
   {
-    headerMode: 'none',
+    mode: 'modal',
   },
 );
 // reducer initialization code

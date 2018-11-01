@@ -4,8 +4,7 @@ import {
   List,
   Product,
 } from './connectors';
-// FIXME: las queries de lista y producto no furulan
-// El problema puede venir de connectors.js
+
 export const resolvers = {
   Query: {
     user(_, args) {

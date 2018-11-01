@@ -793,7 +793,7 @@ apollo-cache-inmemory@1.2.10:
     apollo-utilities "^1.0.21"
     graphql-anywhere "^4.1.19"
 
-apollo-cache-redux@^0.1.1:
+apollo-cache-redux@^0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/apollo-cache-redux/-/apollo-cache-redux-0.1.2.tgz#0b72d9d61f75818d97fe4fc283ed040d8d046dd5"
   integrity sha512-DgxIeQuAvrJCUOi0C/JAGt1JuNdjhoA7ikQVVk8ID7yIs1s1XJDSeOBZyWDgxmf9nWWX7VCRivSWltPhPqjt8g==
@@ -2575,6 +2575,11 @@ find-up@^2.0.0, find-up@^2.1.0:
   integrity sha1-RdG35QbHF93UgndaK3eSCjwMV6c=
   dependencies:
     locate-path "^2.0.0"
+
+font-awesome@^4.7.0:
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/font-awesome/-/font-awesome-4.7.0.tgz#8fa8cf0411a1a31afd07b06d2902bb9fc815a133"
+  integrity sha1-j6jPBBGhoxr9B7BtKQK7n8gVoTM=
 
 for-in@^1.0.1, for-in@^1.0.2:
   version "1.0.2"
@@ -4984,6 +4989,11 @@ query-string@^6.1.0:
   dependencies:
     decode-uri-component "^0.2.0"
     strict-uri-encode "^2.0.0"
+
+ramda@^0.25.0:
+  version "0.25.0"
+  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.25.0.tgz#8fdf68231cffa90bc2f9460390a0cb74a29b29a9"
+  integrity sha512-GXpfrYVPwx3K7RQ6aYT8KPS8XViSXUVJT1ONhoKPE9VAleW42YE+U+8VEyGWt41EnEQW7gwecYJriTI0pKoecQ==
 
 randomatic@^3.0.0:
   version "3.1.0"
