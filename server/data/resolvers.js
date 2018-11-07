@@ -20,6 +20,18 @@ export const resolvers = {
       return Product.findOne({ where: args, order: [['updatedAt', 'DESC']] });
     },
   },
+  Mutation: {
+    createProduct(_, {
+      name, quantity, price, listId,
+    }) {
+      return Product.create({
+        name,
+        quantity,
+        price,
+        listId,
+      }).then;
+    },
+  },
   User: {
     groups(user) {
       return user.getGroups();

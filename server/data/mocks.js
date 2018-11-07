@@ -46,6 +46,8 @@ const mockDB = async ({ populating = true, force = true }) => {
       return users;
     }, groups),
   );
+  // FIXME: necesita actualizar debido al cambio en la base de datos
+  /*
   console.log('populating lists....');
   await Promise.all(
     R.map(async (group) => {
@@ -70,7 +72,7 @@ const mockDB = async ({ populating = true, force = true }) => {
       return lists;
     }, groups),
   );
-
+*/
 
   console.log('populating friends....');
   await R.map(
