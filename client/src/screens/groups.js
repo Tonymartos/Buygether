@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import {
   FlatList, Text, TouchableHighlight, View, StyleSheet,
 } from 'react-native';
+import ActionButton from 'react-native-action-button';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { graphql } from 'react-apollo';
 import { USER_QUERY } from '../graphql/user.query';
 
@@ -18,7 +20,7 @@ const styles = StyleSheet.create({
 });
 
 const Group = ({ group: { name }, onGroupPress }) => (
-  <TouchableHighlight style={styles.group} onPress={onGroupPress} underlayColor="rgba(100, 200, 255, 0.3)">
+  <TouchableHighlight style={styles.group} onPress={onGroupPress} underlayColor='rgba(100, 200, 255, 0.3)'>
     <View>
       <Text>{name}</Text>
     </View>
@@ -48,7 +50,7 @@ class Groups extends Component {
   render() {
     const { user } = this.props;
     return (
-      <View>
+      <View style={{ flex: 1, backgroundColor: '#f3f3f3' }}>
         {user && (
           <FlatList
             data={user.groups}
@@ -56,6 +58,11 @@ class Groups extends Component {
             renderItem={this.renderItem}
           />
         )}
+        <ActionButton buttonColor='rgba(231,76,60,1)'>
+          <ActionButton.Item buttonColor='#9b59b6' title='New Group' onPress={() => console.log('Group added!')}>
+            <Icon name="md-people" style={styles.actionButtonIcon} />
+          </ActionButton.Item>
+        </ActionButton>
       </View>
     );
   }

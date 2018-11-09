@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import {
   FlatList, Text, TouchableHighlight, View, StyleSheet,
 } from 'react-native';
+import ActionButton from 'react-native-action-button';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { graphql } from 'react-apollo';
 import { GROUP_QUERY } from '../graphql/group.query';
 
@@ -58,7 +60,7 @@ class GroupScreen extends Component {
   render() {
     const { group } = this.props;
     return (
-      <View>
+      <View style={{ flex: 1, backgroundColor: '#f3f3f3' }}>
         { group
         && (
         <FlatList
@@ -67,6 +69,11 @@ class GroupScreen extends Component {
           keyExtractor={this.keyExtractor}
         />
         ) }
+        <ActionButton buttonColor='rgba(231,76,60,1)'>
+          <ActionButton.Item buttonColor='#9b59b6' title='New List' onPress={() => console.log('List added!')}>
+            <Icon name="md-list-box" style={styles.actionButtonIcon} />
+          </ActionButton.Item>
+        </ActionButton>
       </View>
     );
   }
