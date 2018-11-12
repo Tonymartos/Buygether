@@ -46,21 +46,24 @@ const mockDB = async ({ populating = true, force = true }) => {
       return users;
     }, groups),
   );
+
   console.log('populating lists....');
   await Promise.all(
     R.map(async (group) => {
       const lists = await Promise.all(
         R.times(async (n) => {
-          const list = await group.createList({
+          const list = await db.models.list.create({
+            groupId: group.id,
             name: faker.lorem.word(),
             state: !n, // solo está activa la primera lista de cada grupo
           });
           await Promise.all(
             R.times(async () => {
-              await list.createProduct({
+              await db.models.product.create({
                 name: faker.lorem.word(),
                 quantity: Math.ceil(Math.random() * 10),
                 price: Math.random() * 10,
+                listId: list.id,
               });
             }, PRODUCTS_PER_LIST),
           );

@@ -31,11 +31,9 @@ GroupModel.belongsToMany(UserModel, { through: 'GroupUser' });
 // users belong to multiple users as friends
 UserModel.belongsToMany(UserModel, { through: 'Friends', as: 'friends' });
 // groups have multiple lists, but lists belong only to one group
-GroupModel.belongsToMany(ListModel, { through: 'ListGroup' });
 ListModel.belongsTo(GroupModel);
 // products belong to multiple lists and lists have multiple products
-ProductModel.belongsToMany(ListModel, { through: 'ListProduct' });
-ListModel.belongsToMany(ProductModel, { through: 'ListProduct' });
+ProductModel.belongsTo(ListModel);
 
 const Group = db.models.group;
 const User = db.models.user;

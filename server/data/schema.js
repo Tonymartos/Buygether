@@ -30,6 +30,7 @@ export const typeDefs = gql`
     name: String!
     quantity: Int!
     price: Float
+    list: List!
   }
 
   # query for types
@@ -44,8 +45,13 @@ export const typeDefs = gql`
     product(id: Int): Product
 
   }
+
+  type Mutation {
+    createProduct(name: String!, quantity: Int!, price: Float, listId: Int!): Product
+  }
   schema {
     query: Query
+    mutation: Mutation
   }
 `;
 
