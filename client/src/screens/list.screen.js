@@ -92,7 +92,7 @@ ListScreen.propTypes = {
 };
 
 const listQuery = graphql(LIST_QUERY, {
-  options: props => ({ variables: { id: props.navigation.state.listId } }),
+  options: props => ({ variables: { id: props.navigation.state.params.listId } }),
   props: ({ data: { loading, list } }) => ({
     loading,
     list,

@@ -51,7 +51,6 @@ class GroupScreen extends Component {
     const {
       navigation: { navigate },
     } = this.props;
-    console.log(list.name);
     navigate('List', { title: list.name, listId: list.id });
   };
 
@@ -94,7 +93,7 @@ GroupScreen.propTypes = {
 };
 
 const groupQuery = graphql(GROUP_QUERY, {
-  options: props => ({ variables: { id: props.navigation.state.groupId } }),
+  options: props => ({ variables: { id: props.navigation.state.params.groupId } }),
   props: ({ data: { loading, group } }) => ({
     loading,
     group,

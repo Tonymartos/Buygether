@@ -41,7 +41,6 @@ class Groups extends Component {
     const {
       navigation: { navigate },
     } = this.props;
-    console.log(group.name);
     navigate('Group', { title: group.name, groupId: group.id });
   };
 
