@@ -22,7 +22,9 @@ export const resolvers = {
   },
   Mutation: {
     createProduct(_, {
-      name, quantity, price, listId,
+      product: {
+        name, quantity, price, listId,
+      },
     }) {
       return Product.create({
         name,
