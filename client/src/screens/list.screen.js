@@ -65,8 +65,8 @@ class ListScreen extends Component {
           keyExtractor={this.keyExtractor}
         />
         ) }
-        <ActionButton buttonColor='rgba(231,76,60,1)'>
-          <ActionButton.Item buttonColor='#9b59b6' title='New Product' onPress={() => console.log('Product added!')}>
+        <ActionButton buttonColor="rgba(231,76,60,1)">
+          <ActionButton.Item buttonColor="#9b59b6" title="New Product" onPress={() => console.log('Product added!')}>
             <Icon name="md-pricetag" style={styles.actionButtonIcon} />
           </ActionButton.Item>
         </ActionButton>
