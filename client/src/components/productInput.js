@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { TextInput, View, Button } from 'react-native';
+import PropTypes from 'prop-types';
 
 class ProductInput extends Component {
   constructor(props) {
@@ -11,12 +12,13 @@ class ProductInput extends Component {
     };
   }
 
-  add = () => {
-    console.log(this.state);
+  handleAdd(add) {
+    add(this.state);
     this.textInput.clear();
   }
 
   render() {
+    const { add } = this.props;
     return (
       <View>
         <TextInput
@@ -26,10 +28,14 @@ class ProductInput extends Component {
           placeholder="Product name"
           onChangeText={text => this.setState({ name: text })}
         />
-        <Button onPress={this.add} title="Añadir" />
+        <Button onPress={() => this.handleAdd(add)} title="Añadir" />
       </View>
     );
   }
 }
+
+ProductInput.propTypes = {
+  add: PropTypes.func,
+};
 
 export default ProductInput;

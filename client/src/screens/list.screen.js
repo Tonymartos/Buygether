@@ -74,7 +74,7 @@ class ListScreen extends Component {
           keyExtractor={this.keyExtractor}
         />
         ) }
-        { adding ? <ProductInput /> : (
+        { adding ? <ProductInput add={thing => console.log(thing)} /> : (
           <ActionButton buttonColor="rgba(231,76,60,1)">
             <ActionButton.Item buttonColor="#9b59b6" title="New Product" onPress={() => this.setState({ adding: true })}>
               <Icon name="md-pricetag" style={styles.actionButtonIcon} />
