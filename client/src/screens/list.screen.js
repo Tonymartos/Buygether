@@ -7,6 +7,7 @@ import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { graphql } from 'react-apollo';
 import { LIST_QUERY } from '../graphql/list.query';
+import ProductInput from '../components/productInput';
 
 const styles = StyleSheet.create({
   list: {
@@ -49,12 +50,20 @@ class ListScreen extends Component {
     };
   }
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      adding: false,
+    };
+  }
+
   keyExtractor = ({ id }) => id.toString();
 
   renderItem = ({ item }) => <Product product={item} />;
 
   render() {
     const { list } = this.props;
+    const { adding } = this.state;
     return (
       <View style={{ flex: 1, backgroundColor: '#f3f3f3' }}>
         { list
@@ -65,11 +74,14 @@ class ListScreen extends Component {
           keyExtractor={this.keyExtractor}
         />
         ) }
-        <ActionButton buttonColor="rgba(231,76,60,1)">
-          <ActionButton.Item buttonColor="#9b59b6" title="New Product" onPress={() => console.log('Product added!')}>
-            <Icon name="md-pricetag" style={styles.actionButtonIcon} />
-          </ActionButton.Item>
-        </ActionButton>
+        { adding ? <ProductInput /> : (
+          <ActionButton buttonColor="rgba(231,76,60,1)">
+            <ActionButton.Item buttonColor="#9b59b6" title="New Product" onPress={() => this.setState({ adding: true })}>
+              <Icon name="md-pricetag" style={styles.actionButtonIcon} />
+            </ActionButton.Item>
+          </ActionButton>
+        )
+        }
       </View>
     );
   }
