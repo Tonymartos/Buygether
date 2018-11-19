@@ -7,12 +7,12 @@ class ProductInput extends Component {
     super(props);
     this.state = {
       name: '',
-      // quantity: 1,
-      // price: 0,
+      quantity: 1,
+      price: 0,
     };
   }
 
-  handleAdd(add) {
+  handleAdd = (add) => {
     add(this.state);
     this.textInput.clear();
   }
@@ -26,7 +26,21 @@ class ProductInput extends Component {
             this.textInput = ref;
           }}
           placeholder="Product name"
-          onChangeText={text => this.setState({ name: text })}
+          onChangeText={name => this.setState({ name })}
+        />
+        <TextInput
+          ref={(ref) => {
+            this.quantityInput = ref;
+          }}
+          placeholder="Quantity"
+          onChangeText={quantity => this.setState({ quantity })}
+        />
+        <TextInput
+          ref={(ref) => {
+            this.priceInput = ref;
+          }}
+          placeholder="Price"
+          onChangeText={price => this.setState({ price })}
         />
         <Button onPress={() => this.handleAdd(add)} title="Añadir" />
       </View>
