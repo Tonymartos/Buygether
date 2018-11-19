@@ -5,8 +5,9 @@ import {
 } from 'react-native';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { graphql } from 'react-apollo';
+import { graphql, compose } from 'react-apollo';
 import { LIST_QUERY } from '../graphql/list.query';
+import CREATE_PRODUCT_MUTATION from '../graphql/add-product.mutation';
 import ProductInput from '../components/productInput';
 
 const styles = StyleSheet.create({
@@ -59,6 +60,11 @@ class ListScreen extends Component {
 
   keyExtractor = ({ id }) => id.toString();
 
+  addProduct = (product) => {
+    const { createProduct } = this.props;
+    createProduct(product);
+  }
+
   renderItem = ({ item }) => <Product product={item} />;
 
   render() {
@@ -74,7 +80,7 @@ class ListScreen extends Component {
           keyExtractor={this.keyExtractor}
         />
         ) }
-        { adding ? <ProductInput add={thing => console.log(thing)} /> : (
+        { adding ? <ProductInput add={this.addProduct} /> : (
           <ActionButton buttonColor="rgba(231,76,60,1)">
             <ActionButton.Item buttonColor="#9b59b6" title="New Product" onPress={() => this.setState({ adding: true })}>
               <Icon name="md-pricetag" style={styles.actionButtonIcon} />
@@ -88,6 +94,7 @@ class ListScreen extends Component {
 }
 
 ListScreen.propTypes = {
+  createProduct: PropTypes.func,
   navigation: PropTypes.shape({
     navigate: PropTypes.func,
   }),
@@ -111,4 +118,12 @@ const listQuery = graphql(LIST_QUERY, {
   }),
 });
 
-export default listQuery(ListScreen);
+const createProductMutation = graphql(CREATE_PRODUCT_MUTATION, {
+  props: ({ mutate }) => ({
+    createProduct: product => mutate({
+      variables: { product },
+    }),
+  }),
+});
+
+export default compose(listQuery, createProductMutation)(ListScreen);
