@@ -1,14 +1,21 @@
+import React from 'react';
 import {
+  TouchableOpacity, View,
+} from 'react-native';
+import {
+  DrawerActions,
   StackActions,
   NavigationActions,
   createStackNavigator,
   createMaterialTopTabNavigator,
+  createDrawerNavigator,
 } from 'react-navigation';
 import {
   reduxifyNavigator,
   createReactNavigationReduxMiddleware,
 } from 'react-navigation-redux-helpers';
 import { connect } from 'react-redux';
+import Icon from 'react-native-vector-icons/Ionicons';
 import Groups from './screens/groups';
 import TestScreen from './screens/testScreen';
 import GroupScreen from './screens/group.screen';
@@ -24,7 +31,30 @@ const MainScreenNavigator = createMaterialTopTabNavigator(
     initialRouteName: 'Groups',
   },
 );
+
+const HeaderNavigator = createDrawerNavigator({
+  GroupsDrawer: { screen: MainScreenNavigator },
+  TestDrawer: { screen: TestScreen },
+});
+
 const AppNavigator = createStackNavigator(
+  {
+    HeaderNavigator: { screen: HeaderNavigator },
+  },
+  {
+    headerMode: 'float',
+    navigationOptions: ({ navigation }) => ({
+      headerStyle: {
+        backgroundColor: '#58E6F9',
+      },
+      title: 'GetherApp',
+      headerLeft: <View>
+        <TouchableOpacity onPress={() => { navigation.dispatch(DrawerActions.toggleDrawer()); }}>
+          <Icon name="md-menu" size={35} />
+        </TouchableOpacity>
+      </View>
+    }),
+  },
   {
     Main: { screen: MainScreenNavigator },
     Group: { screen: GroupScreen },
@@ -35,6 +65,8 @@ const AppNavigator = createStackNavigator(
     mode: 'modal',
   },
 );
+
+
 // reducer initialization code
 const initialState = AppNavigator.router.getStateForAction(
   StackActions.reset({
