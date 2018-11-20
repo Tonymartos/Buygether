@@ -15,8 +15,11 @@ class ProductInput extends Component {
   handleAdd = (add) => {
     add(this.state);
     this.textInput.clear();
+    this.quantityInput.clear();
+    this.priceInput.clear();
   }
 
+  // TODO: cambiar cantidad y precio a numeros
   render() {
     const { add } = this.props;
     return (

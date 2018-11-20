@@ -46,7 +46,7 @@ export const typeDefs = gql`
 
   }
 
-  input createProductInput{
+  input CreateProductInput{
     name: String!
     quantity: Int!
     price: Float
@@ -54,7 +54,7 @@ export const typeDefs = gql`
   }
 
   type Mutation {
-    createProduct(product: createProductInput!): Product
+    createProduct(product: CreateProductInput!): Product
   }
   schema {
     query: Query

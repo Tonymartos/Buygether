@@ -60,27 +60,28 @@ class ListScreen extends Component {
 
   keyExtractor = ({ id }) => id.toString();
 
-  addProduct = (product) => {
+  addProduct = listId => (product) => {
     const { createProduct } = this.props;
-    createProduct(product);
+    createProduct({ listId, ...product });
   }
 
   renderItem = ({ item }) => <Product product={item} />;
 
   render() {
-    const { list } = this.props;
+    const { list, navigation: { state: { params: { listId } } } } = this.props;
+    console.log(listId);
     const { adding } = this.state;
     return (
       <View style={{ flex: 1, backgroundColor: '#f3f3f3' }}>
-        { list
-        && (
-        <FlatList
-          data={list.products}
-          renderItem={this.renderItem}
-          keyExtractor={this.keyExtractor}
-        />
-        ) }
-        { adding ? <ProductInput add={this.addProduct} /> : (
+        {list
+          && (
+            <FlatList
+              data={list.products}
+              renderItem={this.renderItem}
+              keyExtractor={this.keyExtractor}
+            />
+          )}
+        {adding ? <ProductInput add={this.addProduct(listId)} /> : (
           <ActionButton buttonColor="rgba(231,76,60,1)">
             <ActionButton.Item buttonColor="#9b59b6" title="New Product" onPress={() => this.setState({ adding: true })}>
               <Icon name="md-pricetag" style={styles.actionButtonIcon} />
