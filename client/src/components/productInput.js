@@ -13,15 +13,22 @@ class ProductInput extends Component {
   }
 
   handleAdd = (add) => {
-    add(this.state);
-    this.textInput.clear();
-    this.quantityInput.clear();
-    this.priceInput.clear();
+    const { name } = this.state;
+    if (name) {
+      add(this.state);
+      this.setState({
+        name: '',
+        quantity: 1,
+        price: 0,
+      });
+    } else {
+      console.log('empty name');
+    }
   }
 
-  // TODO: cambiar cantidad y precio a numeros
   render() {
     const { add } = this.props;
+    const { name, quantity, price } = this.state;
     return (
       <View>
         <TextInput
@@ -29,21 +36,26 @@ class ProductInput extends Component {
             this.textInput = ref;
           }}
           placeholder="Product name"
-          onChangeText={name => this.setState({ name })}
+          onChangeText={newName => this.setState({ name: newName })}
+          value={name}
         />
         <TextInput
           ref={(ref) => {
             this.quantityInput = ref;
           }}
+          keyboardType="numeric"
           placeholder="Quantity"
-          onChangeText={quantity => this.setState({ quantity })}
+          onChangeText={newQuantity => this.setState({ quantity: parseInt(newQuantity.replace(/[^0-9]/, ''), 10) })}
+          value={quantity ? quantity.toString() : '0'}
         />
         <TextInput
           ref={(ref) => {
             this.priceInput = ref;
           }}
           placeholder="Price"
-          onChangeText={price => this.setState({ price })}
+          keyboardType="numeric"
+          onChangeText={newPrice => this.setState({ price: parseInt(newPrice.replace(/[^0-9]/, ''), 10) })}
+          value={price ? price.toString() : '0'}
         />
         <Button onPress={() => this.handleAdd(add)} title="Añadir" />
       </View>
