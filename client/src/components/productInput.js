@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { TextInput, View, Button } from 'react-native';
 import PropTypes from 'prop-types';
+import ActionButton from 'react-native-action-button';
 
 class ProductInput extends Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class ProductInput extends Component {
   }
 
   render() {
-    const { add } = this.props;
+    const { add, close } = this.props;
     const { name, quantity, price } = this.state;
     return (
       <View>
@@ -58,6 +59,15 @@ class ProductInput extends Component {
           onChangeText={newPrice => this.setState({ price: parseInt(newPrice.replace(/[^0-9]/, ''), 10) })}
           value={price ? price.toString() : '0'}
         />
+        <ActionButton
+          buttonColor="rgba(231,76,60,1)"
+          buttonText="x"
+          size={25}
+          verticalOrientation="down"
+          offsetY={-40}
+          offsetX={15}
+          onPress={close}
+        />
         <Button onPress={() => this.handleAdd(add)} title="Añadir" />
       </View>
     );
@@ -66,6 +76,7 @@ class ProductInput extends Component {
 
 ProductInput.propTypes = {
   add: PropTypes.func,
+  close: PropTypes.func,
 };
 
 export default ProductInput;

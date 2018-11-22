@@ -69,7 +69,6 @@ class ListScreen extends Component {
 
   render() {
     const { list, navigation: { state: { params: { listId } } } } = this.props;
-    console.log(listId);
     const { adding } = this.state;
     return (
       <View style={{ flex: 1, backgroundColor: '#f3f3f3' }}>
@@ -81,13 +80,20 @@ class ListScreen extends Component {
               keyExtractor={this.keyExtractor}
             />
           )}
-        {adding ? <ProductInput add={this.addProduct(listId)} /> : (
-          <ActionButton buttonColor="rgba(231,76,60,1)">
-            <ActionButton.Item buttonColor="#9b59b6" title="New Product" onPress={() => this.setState({ adding: true })}>
-              <Icon name="md-pricetag" style={styles.actionButtonIcon} />
-            </ActionButton.Item>
-          </ActionButton>
-        )
+        {adding
+          ? (
+            <ProductInput
+              add={this.addProduct(listId)}
+              close={() => this.setState({ adding: false })}
+            />
+          )
+          : (
+            <ActionButton buttonColor="rgba(231,76,60,1)">
+              <ActionButton.Item buttonColor="#9b59b6" title="New Product" onPress={() => this.setState({ adding: true })}>
+                <Icon name="md-pricetag" style={styles.actionButtonIcon} />
+              </ActionButton.Item>
+            </ActionButton>
+          )
         }
       </View>
     );
