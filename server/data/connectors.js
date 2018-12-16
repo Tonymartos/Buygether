@@ -1,11 +1,9 @@
 import Sequelize from 'sequelize';
+import configurationManager from '../configurationManager';
 
 // initialize our database
-const db = new Sequelize('getherapp', null, null, {
-  dialect: 'sqlite',
-  storage: './getherapp.sqlite',
-  logging: false, // mark this true if you want to see logs
-});
+const db = new Sequelize(...configurationManager.db);
+
 // define groups
 const GroupModel = db.define('group', {
   name: { type: Sequelize.STRING },

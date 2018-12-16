@@ -1,4 +1,5 @@
 import React from 'react';
+import Config from 'react-native-config';
 import { ApolloClient } from 'apollo-client';
 import { ApolloLink } from 'apollo-link';
 import { ApolloProvider } from 'react-apollo';
@@ -8,11 +9,11 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { ReduxCache, apolloReducer } from 'apollo-cache-redux';
 import ReduxLink from 'apollo-link-redux';
-import { onError } from 'apollo-link-error';
 
+import { onError } from 'apollo-link-error';
 import AppWithNavigationState, { navigationReducer, navigationMiddleware } from './navigation';
 
-const URL = '172.16.101.223:8080'; // set your comp's url here
+const URL = Config.SERVER_URL;
 const store = createStore(
   combineReducers({
     apollo: apolloReducer,
@@ -26,7 +27,7 @@ const reduxLink = new ReduxLink(store);
 const errorLink = onError((errors) => {
   console.log(errors);
 });
-const httpLink = createHttpLink({ uri: `http://${URL}` });
+const httpLink = createHttpLink({ uri: URL });
 const link = ApolloLink.from([reduxLink, errorLink, httpLink]);
 export const client = new ApolloClient({
   link,

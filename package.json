@@ -3,18 +3,25 @@
   "version": "1.0.0",
   "description": "- Aplicacion con React-Native para gestion de compras conjuntas",
   "main": "index.js",
+  "license": "MIT",
   "scripts": {
-    "start": "nodemon --watch server --watch package.json server/index.js --exec babel-node --presets es2015,stage-2",
-    "start-emulator": "$ANDROID_HOME/emulator/emulator @Nexus_6_API_27"
+    "dev": "nodemon --watch server --watch package.json server/index.js --exec babel-node --presets es2015,stage-2",
+    "build": "babel --presets es2015,stage-2 server --out-dir dist",
+    "deploy": "now",
+    "start": "NODE_ENV=production node dist/index.js"
   },
+  
   "dependencies": {
     "apollo-server": "^2.1.0",
+    "babel-polyfill": "^6.26.0",
     "faker": "^4.1.0",
     "graphql": "^14.0.2",
     "graphql-date": "^1.0.3",
+    "now": "^12.1.6",
+    "pg": "^7.7.1",
+    "pg-hstore": "^2.3.2",
     "ramda": "^0.25.0",
-    "react-navigation": "^2.18.0",
-    "sequelize": "^4.39.1",
+    "sequelize": "^4.39.0",
     "sqlite3": "^4.0.2"
   },
   "devDependencies": {
@@ -24,10 +31,11 @@
     "babel-preset-stage-2": "^6.24.1",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^17.1.0",
+    "eslint-import-resolver-reactnative": "^1.0.2",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.11.1",
-    "nodemon": "^1.18.4",
+    "nodemon": "^1.18.7",
     "prettier-eslint": "^8.8.2"
   },
   "repository": {
